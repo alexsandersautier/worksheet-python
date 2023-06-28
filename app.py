@@ -1,22 +1,24 @@
 import openpyxl
 
-workbook = openpyxl.Workbook()
+def criar__planilha(empresa,vaga,data_aplicacao,retorno, continuar):
 
-del workbook['Sheet']
+    workbook = openpyxl.Workbook()
 
-workbook.create_sheet('vagas')
+    del workbook['Sheet']
 
-sheet_vagas = workbook['vagas']
+    workbook.create_sheet('vagas')
 
-sheet_vagas.append(['Empresa','Vaga','Data da Aplicação','Retorno'])
+    sheet_vagas = workbook['vagas']
 
-continuar = 's'
-while continuar == 's':
-    empresa = input('Digite o nome da empresa: ')
-    vaga = input('Digite o nome da vaga: ')
-    data_aplicacao = input('Digite a data de aplicação para a vaga: ')
-    retorno = input('Teve retorno esta vaga? ')
-    sheet_vagas.append([empresa,vaga,data_aplicacao,retorno])
-    continuar = input('Desejar preencher mais dados? (s/n): ')
+    sheet_vagas.append(['Empresa','Vaga','Data da Aplicação','Retorno'])
 
-workbook.save('Acompanhamento de Vagas.xlsx')
+    con = 's'
+    while continuar == 's':
+        emp = empresa
+        vag = vaga
+        dt_apli = data_aplicacao
+        ret = retorno
+        sheet_vagas.append([emp,vag,dt_apli,ret])
+        con = continuar
+
+    workbook.save('Acompanhamento de Vagas.xlsx')
