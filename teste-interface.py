@@ -1,62 +1,64 @@
 from tkinter import *
+from datetime import datetime
 import app
 
-def exibir_selecao():
-    valor_checkbox1 = checkbox1_var.get()
-    valor_checkbox2 = checkbox2_var.get()
+window = Tk()
+
+window.title("Registration of Job Vacancies")
+window.config(padx=10, pady=100)
+
+# field company
+lbl_company = Label(text="Company:")
+lbl_company.grid(row=2,column=0)
+ent_company = Entry(width=35)
+ent_company.grid(row=2,column=1, columnspan=2)
+
+# field vacancy
+lbl_vacancy = Label(text="Vacancy:")
+lbl_vacancy.grid(row=3,column=0)
+ent_vacancy = Entry(width=35)
+ent_vacancy.grid(row=3,column=1, columnspan=2)
+
+# field Application Date
+lbl_date = Label(text="Application Date:")
+lbl_date.grid(row=4,column=0)
+ent_date = Entry(width=20)
+ent_date.grid(row=4,column=1,columnspan=2)
+
+# field Register Other?
+lbl_register = Label(text="Register other?")
+lbl_register.grid(row=5,column=0)
+ent_register = Entry(width=35)
+ent_register.grid(row=5,column=1,columnspan=2)
+
+def delete():
+    ent_company.delete(0,'end')
+    ent_vacancy.delete(0,'end')
+    ent_date.delete(0,'end')
+    ent_register.delete(0,'end')
+    ent_company.focus()
+
+def date():
+    company = ent_company.get()
+    vacancy = ent_vacancy.get()
+    date_reg = ent_date.get()
+    continues = ent_register.get()
+    print(company, vacancy, date_reg, continues)
+    app.criar__planilha(company, vacancy, date_reg, continues)
+    delete()
+
+def exit():
+    window.destroy()
+
+# btn save
+btn_save = Button(text="Save",width=15,command=date)
+btn_save.grid(row=6,column=0)
+
+btn_delete = Button(text="Delete",width=15,command=delete)
+btn_delete.grid(row=6,column=2)
+
+btn_exit = Button(text="Exit",width=15,command=exit)
+btn_exit.grid(row=7,column=1)
 
 
-janela = Tk()
-
-janela.title("Acompanhamento de Vagas")
-
-
-texto = Label(janela, text="Acompanhamento de Vagas")
-texto.grid(column=0, row=0, padx=5, pady=2)
-
-label_empresa = Label(janela, text="Empresa:")
-label_empresa.grid(column=0, row=1, padx=5, pady=2)
-empresa = Entry(janela, text="Digite o nome da empresa")
-empresa.grid(column=1, row=1, padx=5, pady=2)
-
-label_vaga = Label(janela, text="Vaga:")
-label_vaga.grid(column=0, row=2, padx=5, pady=2)
-vaga = Entry(janela, text="Digite o nome da vaga")
-vaga.grid(column=1, row=2, padx=5, pady=2)
-
-label_data_aplicacao = Label(janela, text="Data Aplicação:")
-label_data_aplicacao.grid(column=0, row=3, padx=5, pady=2)
-data_aplicacao = Entry(janela, text="Digite o nome da empresa")
-data_aplicacao.grid(column=1, row=3, padx=5, pady=2)
-
-label_retorno = Label(janela, text="Teve Retorno?")
-label_retorno.grid(column=0, row=4, padx=5, pady=2)
-retorno = Entry(janela, text="Digite o nome da empresa")
-retorno.grid(column=1, row=4, padx=5, pady=2)
-
-
-label_checkbox1 = Label(janela, text="Cadastrar nova vaga?")
-label_checkbox1.grid(column=0, row=10, padx=1, pady=1)
-
-checkbox1_var = IntVar()
-checkbox1 = Checkbutton(janela, text="Sim", variable=checkbox1_var)
-checkbox1.grid(column=1, row=10, padx=1, pady=1)
-
-
-checkbox2_var = IntVar()
-checkbox2 = Checkbutton(janela, text="Não", variable=checkbox2_var)
-checkbox2.grid(column=2, row=10, padx=1, pady=1)
-
-botao = Button(janela, text="Exibir seleção", command=exibir_selecao)
-botao.grid(column=0, row=12, padx=5, pady=2)
-
-
-
-# botao = Button(janela, text="Buscar cotações", command=pegar_cotacoes)
-# botao.grid(column=0, row=6, padx=5, pady=2)
-
-# texto_resposta = Label(janela, text="")
-# texto_resposta.grid(column=0, row=2, padx=5, pady=2)
-
-
-janela.mainloop()
+window.mainloop()

@@ -1,6 +1,6 @@
 import openpyxl
 
-def criar__planilha(empresa,vaga,data_aplicacao,retorno, continuar):
+def criar__planilha(empresa,vaga,data_aplicacao,retorno):
 
     workbook = openpyxl.Workbook()
 
@@ -12,13 +12,10 @@ def criar__planilha(empresa,vaga,data_aplicacao,retorno, continuar):
 
     sheet_vagas.append(['Empresa','Vaga','Data da Aplicação','Retorno'])
 
-    con = 's'
-    while continuar == 's':
-        emp = empresa
-        vag = vaga
-        dt_apli = data_aplicacao
-        ret = retorno
-        sheet_vagas.append([emp,vag,dt_apli,ret])
-        con = continuar
-
+    emp = empresa
+    vag = vaga
+    dt_apli = data_aplicacao
+    ret = retorno
+    sheet_vagas.append([emp,vag,dt_apli,ret])
+    # print(f"{empresa} - {vaga} - {data_aplicacao} - {retorno}")
     workbook.save('Acompanhamento de Vagas.xlsx')
